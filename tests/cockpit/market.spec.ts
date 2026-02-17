@@ -2,21 +2,18 @@ import { expect } from "@playwright/test";
 import { test } from "../fixtures/roles.fixture";
 import { AgentDataFactory } from "../data/agentDataFactory";
 import { AgentPage } from "../../pages/Agent";
-import { MarketPage } from "../../pages/Market";
 import { MarketplacePage } from "../../pages/Marketplace";
 import { PublicMarketplacePage } from "../../pages/PublicMarketplace";
 
 test.describe("Marketplace Agent Management Tests", () => {
   let agentData: ReturnType<typeof AgentDataFactory.generateAgentData>;
   let agent: AgentPage;
-  let market: MarketPage;
   let marketplace: MarketplacePage;
 
   test.beforeEach(async ({ adminPage }) => {
     await adminPage.goto("/spaces");
     agentData = AgentDataFactory.generateAgentData();
     agent = new AgentPage(adminPage);
-    market = new MarketPage(adminPage);
     marketplace = new MarketplacePage(adminPage);
     await agent.navigateToAgents();
   });
@@ -41,10 +38,14 @@ test.describe("Marketplace Agent Management Tests", () => {
     await marketplace.navigateToMarketplace();
     await marketplace.startCreateListing();
     await marketplace.openAgentDropdown();
-    await market.createListingForAgent(agentData.name, "sfdsfewe4e", "febin");
+    await marketplace.createListingForAgent(
+      agentData.name,
+      "sfdsfewe4e",
+      "febin",
+    );
 
     // CLEANUP: Delete agent from Marketplace
-    await market.deleteListing(agentData.name);
+    await marketplace.deleteListing(agentData.name);
 
     // CLEANUP: Delete agent from agent
     await agent.navigateToAgents2();
@@ -77,14 +78,18 @@ test.describe("Marketplace Agent Management Tests", () => {
     //   await page.getByRole('button', { name: 'Create Listing' }).click();
     //   await page.getByRole('button', { name: 'Agent' }).click();
     //   await page.getByRole('combobox').filter({ hasText: 'Select an agent' }).click();
-    await market.createListingForAgent(agentData.name, "sfdsfewe4e", "febin");
+    await marketplace.createListingForAgent(
+      agentData.name,
+      "sfdsfewe4e",
+      "febin",
+    );
     await marketplace.startCreateListing();
     await marketplace.openAgentDropdown();
     await marketplace.expectAgentNotInDropdown(agentData.name);
     await marketplace.closeListingModal();
 
     // CLEANUP: Delete agent from Marketplace
-    await market.deleteListing(agentData.name);
+    await marketplace.deleteListing(agentData.name);
 
     // CLEANUP: Delete agent from agent
     await agent.navigateToAgents2();
@@ -110,17 +115,21 @@ test.describe("Marketplace Agent Management Tests", () => {
     await marketplace.navigateToMarketplace();
     await marketplace.startCreateListing();
     await marketplace.openAgentDropdown();
-    await market.createListingForAgent(agentData.name, "sfdsfewe4e", "febin");
+    await marketplace.createListingForAgent(
+      agentData.name,
+      "sfdsfewe4e",
+      "febin",
+    );
 
     // verify listing row and status
     await expect(
       adminPage.getByRole("heading", { name: agentData.name }),
     ).toBeVisible();
     await expect(adminPage.locator("tbody")).toContainText(agentData.name);
-    await market.expectListingStatus(agentData.name, "DRAFT");
+    await marketplace.expectListingStatus(agentData.name, "DRAFT");
 
     // CLEANUP: Delete agent from Marketplace
-    await market.deleteListing(agentData.name);
+    await marketplace.deleteListing(agentData.name);
 
     // CLEANUP: Delete agent from agent
     await agent.navigateToAgents2();
@@ -150,7 +159,11 @@ test.describe("Marketplace Agent Management Tests", () => {
     await marketplace.openAgentDropdown();
     await marketplace.expectAgentInDropdown(agentData.name);
 
-    await market.createListingForAgent(agentData.name, "sfdsfewe4e", "febin");
+    await marketplace.createListingForAgent(
+      agentData.name,
+      "sfdsfewe4e",
+      "febin",
+    );
     const row = adminPage.locator("tbody tr").filter({
       has: adminPage.locator("h3", { hasText: agentData.name }),
     });
@@ -164,7 +177,7 @@ test.describe("Marketplace Agent Management Tests", () => {
     const editedName = `${agentData.name}_edited`;
     const editedDescription = `${agentData.description}_updated`;
 
-    await market.editListing(agentData.name, {
+    await marketplace.editListing(agentData.name, {
       title: editedName,
       shortDescription: editedDescription,
       pricingOption: "Freemium",
@@ -178,7 +191,7 @@ test.describe("Marketplace Agent Management Tests", () => {
     await expect(adminPage.locator("tbody")).toContainText(editedDescription);
 
     // CLEANUP: Delete agent from Marketplace
-    await market.deleteListing(editedName);
+    await marketplace.deleteListing(editedName);
 
     // CLEANUP: Delete agent from agent
     await agent.navigateToAgents2();
@@ -206,10 +219,14 @@ test.describe("Marketplace Agent Management Tests", () => {
     await marketplace.openAgentDropdown();
     await marketplace.expectAgentInDropdown(agentData.name);
 
-    await market.createListingForAgent(agentData.name, "sfdsfewe4e", "febin");
+    await marketplace.createListingForAgent(
+      agentData.name,
+      "sfdsfewe4e",
+      "febin",
+    );
 
     // publish
-    await market.publishListing(agentData.name);
+    await marketplace.publishListing(agentData.name);
 
     const row = adminPage.locator("tbody tr").filter({
       has: adminPage.locator("h3", { hasText: agentData.name }),
@@ -221,10 +238,10 @@ test.describe("Marketplace Agent Management Tests", () => {
     ).toBeVisible();
     await expect(adminPage.locator("tbody")).toContainText(agentData.name);
 
-    await market.expectListingStatus(agentData.name, "PUBLISHED");
+    await marketplace.expectListingStatus(agentData.name, "PUBLISHED");
 
     // CLEANUP: Delete agent from Marketplace
-    await market.deleteListing(agentData.name);
+    await marketplace.deleteListing(agentData.name);
 
     // CLEANUP: Delete agent from agent
     await agent.navigateToAgents2();
@@ -250,7 +267,11 @@ test.describe("Marketplace Agent Management Tests", () => {
     await marketplace.navigateToMarketplace();
     await marketplace.startCreateListing();
     await marketplace.openAgentDropdown();
-    await market.createListingForAgent(agentData.name, "sfdsfewe4e", "febin");
+    await marketplace.createListingForAgent(
+      agentData.name,
+      "sfdsfewe4e",
+      "febin",
+    );
 
     const row = adminPage.locator("tbody tr").filter({
       has: adminPage.locator("h3", { hasText: agentData.name }),
@@ -259,7 +280,7 @@ test.describe("Marketplace Agent Management Tests", () => {
     await expect(row).toHaveCount(1);
 
     // CLEANUP: Delete agent from Marketplace
-    await market.deleteListing(agentData.name);
+    await marketplace.deleteListing(agentData.name);
 
     await expect(row).toHaveCount(0);
 
@@ -292,7 +313,11 @@ test.describe("Marketplace Agent Management Tests", () => {
     await marketplace.openAgentDropdown();
     await marketplace.expectAgentInDropdown(agentData.name);
 
-    await market.createListingForAgent(agentData.name, "sfdsfewe4e", "febin");
+    await marketplace.createListingForAgent(
+      agentData.name,
+      "sfdsfewe4e",
+      "febin",
+    );
 
     //draft
     const row = adminPage.locator("tbody tr").filter({
@@ -305,12 +330,12 @@ test.describe("Marketplace Agent Management Tests", () => {
     ).toBeVisible();
     await expect(adminPage.locator("tbody")).toContainText(agentData.name);
 
-    await market.expectListingStatus(agentData.name, "DRAFT");
+    await marketplace.expectListingStatus(agentData.name, "DRAFT");
     // verify by user - agent should not be visible in marketplace
     const publicMarketplace = new PublicMarketplacePage(userPage);
     await publicMarketplace.verifyAgentNotFound(agentData.name);
     // CLEANUP: Delete agent from Marketplace
-    await market.deleteListing(agentData.name);
+    await marketplace.deleteListing(agentData.name);
 
     // CLEANUP: Delete agent from agent
     await agent.navigateToAgents2();
