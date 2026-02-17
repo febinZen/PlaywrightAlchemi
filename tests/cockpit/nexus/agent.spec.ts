@@ -1,9 +1,9 @@
 import { expect } from "@playwright/test";
-import { test } from "../fixtures/roles.fixture";
-import { AgentPage } from "../../pages/Agent";
-import { MarketplacePage } from "../../pages/Marketplace";
-import { PublicMarketplacePage } from "../../pages/PublicMarketplace";
-import { AgentDataFactory } from "../data/agentDataFactory";
+import { test } from "../../fixtures/roles.fixture";
+import { AgentPage } from "../../../pages/nexus/Agent";
+import { MarketplacePage } from "../../../pages/nexus/Marketplace";
+import { PublicMarketplacePage } from "../../../pages/nexus/PublicMarketplace";
+import { AgentDataFactory } from "../../data/nexus/agentDataFactory";
 
 test.describe("Agent Management Tests", () => {
   let agentData: ReturnType<typeof AgentDataFactory.generateAgentData>;

@@ -1,9 +1,9 @@
 import { expect } from "@playwright/test";
-import { test } from "../fixtures/roles.fixture";
-import { AgentDataFactory } from "../data/agentDataFactory";
-import { AgentPage } from "../../pages/Agent";
-import { MarketplacePage } from "../../pages/Marketplace";
-import { PublicMarketplacePage } from "../../pages/PublicMarketplace";
+import { test } from "../../fixtures/roles.fixture";
+import { AgentDataFactory } from "../../data/nexus/agentDataFactory";
+import { AgentPage } from "../../../pages/nexus/Agent";
+import { MarketplacePage } from "../../../pages/nexus/Marketplace";
+import { PublicMarketplacePage } from "../../../pages/nexus/PublicMarketplace";
 
 test.describe("Marketplace Agent Management Tests", () => {
   let agentData: ReturnType<typeof AgentDataFactory.generateAgentData>;
@@ -334,6 +334,61 @@ test.describe("Marketplace Agent Management Tests", () => {
     // verify by user - agent should not be visible in marketplace
     const publicMarketplace = new PublicMarketplacePage(userPage);
     await publicMarketplace.verifyAgentNotFound(agentData.name);
+    // CLEANUP: Delete agent from Marketplace
+    await marketplace.deleteListing(agentData.name);
+
+    // CLEANUP: Delete agent from agent
+    await agent.navigateToAgents2();
+    await agent.deleteAgent(agentData.name);
+    await agent.expectAgentNotInTable(agentData.name);
+  });
+  test("Published listing visible to all users in same organization", async ({
+    adminPage,
+    userPage,
+  }) => {
+    // CREATE AGENT
+    await agent.createAgent(
+      agentData.name,
+      agentData.description,
+      agentData.systemPrompt,
+      agentData.tags,
+    );
+
+    // VERIFY CREATED
+    await agent.expectAgentExists(agentData.name);
+    await agent.expectAgentInTable(agentData.name);
+    await agent.expectAgentActive(agentData.name);
+
+    // VERIFY REACTIVATED AGENT APPEARS IN MARKETPLACE DROPDOWN
+    await marketplace.navigateToMarketplace();
+    await marketplace.startCreateListing();
+    await marketplace.openAgentDropdown();
+    await marketplace.expectAgentInDropdown(agentData.name);
+
+    await marketplace.createListingForAgent(
+      agentData.name,
+      "sfdsfewe4e",
+      "febin",
+    );
+
+    // publish
+    await marketplace.publishListing(agentData.name);
+
+    const row = adminPage.locator("tbody tr").filter({
+      has: adminPage.locator("h3", { hasText: agentData.name }),
+    });
+
+    await expect(row).toHaveCount(1);
+    await expect(
+      adminPage.getByRole("heading", { name: agentData.name }),
+    ).toBeVisible();
+    await expect(adminPage.locator("tbody")).toContainText(agentData.name);
+
+    await marketplace.expectListingStatus(agentData.name, "PUBLISHED");
+    // verify by user - agent should not be visible in marketplace
+    const publicMarketplace = new PublicMarketplacePage(userPage);
+    await publicMarketplace.verifyAgentFound(agentData.name);
+
     // CLEANUP: Delete agent from Marketplace
     await marketplace.deleteListing(agentData.name);
 
