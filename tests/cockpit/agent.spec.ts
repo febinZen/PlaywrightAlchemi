@@ -2,6 +2,7 @@ import { expect } from "@playwright/test";
 import { test } from "../fixtures/roles.fixture";
 import { AgentPage } from "../../pages/Agent";
 import { MarketplacePage } from "../../pages/Marketplace";
+import { PublicMarketplacePage } from "../../pages/PublicMarketplace";
 import { AgentDataFactory } from "../data/agentDataFactory";
 
 test.describe("Agent Management Tests", () => {
@@ -138,9 +139,9 @@ test.describe("Agent Management Tests", () => {
     await agent.expectAgentInTable(agentData.name);
     await agent.expectAgentActive(agentData.name);
 
-    // verify by user - agent should not be visible in marketplace
-    const marketplace = new MarketplacePage(userPage);
-    await marketplace.verifyAgentNotFound(agentData.name);
+    // verify by user - agent should not be visible in public marketplace
+    const publicMarketplace = new PublicMarketplacePage(userPage);
+    await publicMarketplace.verifyAgentNotFound(agentData.name);
 
     // DELETE
     await agent.deleteAgent(agentData.name);
