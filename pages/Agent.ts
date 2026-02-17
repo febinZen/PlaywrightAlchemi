@@ -9,7 +9,6 @@ export class AgentPage {
   // Navigation Locators
   private readonly cockpitBtn: Locator;
   private readonly agentsLink: Locator;
-  private readonly marketplaceLink: Locator;
 
   // Create Agent Form Locators
   private readonly createAgentBtn: Locator;
@@ -28,11 +27,6 @@ export class AgentPage {
   private readonly agentsTable: Locator;
   private readonly agentsTableBody: Locator;
 
-  // Marketplace Locators
-  private readonly createListingBtn: Locator;
-  private readonly agentCombobox: Locator;
-  private readonly agentDropdown: Locator;
-
   // Dialogs & Confirmations
   private readonly deactivateConfirmBtn: Locator;
   private readonly reactivateConfirmBtn: Locator;
@@ -42,7 +36,6 @@ export class AgentPage {
     // Navigation
     this.cockpitBtn = this.page.getByRole("button", { name: "Cockpit" });
     this.agentsLink = this.page.getByRole("link", { name: "Agents" });
-    this.marketplaceLink = this.page.getByRole("link", { name: "MarketPlace" });
 
     // Create Agent Form
     this.createAgentBtn = this.page.getByRole("button", {
@@ -76,15 +69,6 @@ export class AgentPage {
     this.agentsTable = this.page.locator("table");
     this.agentsTableBody = this.page.locator("tbody");
 
-    // Marketplace
-    this.createListingBtn = this.page.getByRole("button", {
-      name: "Create Listing",
-    });
-    this.agentCombobox = this.page
-      .getByRole("combobox")
-      .filter({ hasText: "Select an agent" });
-    this.agentDropdown = this.page.getByRole("listbox");
-
     // Confirmations
     this.deactivateConfirmBtn = this.page.getByRole("button", {
       name: "Deactivate",
@@ -98,7 +82,6 @@ export class AgentPage {
   }
 
   /* ==================== PRIVATE HELPERS ==================== */
-
   /**
    * Get agent row by name from table
    * Uses flexible text matching for reliability
@@ -130,13 +113,6 @@ export class AgentPage {
   async navigateToAgents2(): Promise<void> {
     await this.agentsLink.click();
     await expect(this.createAgentBtn).toBeVisible();
-  }
-
-  /**
-   * Navigate to marketplace
-   */
-  async navigateToMarketplace(): Promise<void> {
-    await this.marketplaceLink.click();
   }
 
   /* ==================== AGENT CREATION ==================== */
@@ -277,38 +253,6 @@ export class AgentPage {
     await this.deleteConfirmBtn.click();
   }
 
-  /* ==================== MARKETPLACE ==================== */
-
-  /**
-   * Create listing with specific agent
-   */
-  async startCreateListing(): Promise<void> {
-    await this.createListingBtn.click();
-  }
-
-  /**
-   * Open agent dropdown for selection
-   */
-  async openAgentDropdown(): Promise<void> {
-    await this.agentCombobox.click();
-  }
-
-  /**
-   * Select agent from dropdown by name
-   */
-  async selectAgentFromDropdown(agentName: string): Promise<void> {
-    await this.openAgentDropdown();
-    await this.page.getByRole("option", { name: agentName }).click();
-  }
-
-  /**
-   * Close listing creation modal
-   */
-  async closeListingModal(): Promise<void> {
-    await this.closeOverlay();
-    await this.cancelBtn.click();
-  }
-
   /* ==================== ASSERTIONS ==================== */
 
   /**
@@ -349,21 +293,5 @@ export class AgentPage {
   async expectAgentNotInTable(agentName: string): Promise<void> {
     const agentRow = this.getAgentRow(agentName);
     await expect(agentRow).toHaveCount(0);
-  }
-
-  /**
-   * Verify agent does NOT appear in marketplace dropdown
-   */
-  async expectAgentNotInDropdown(agentName: string): Promise<void> {
-    const option = this.page.getByRole("option", { name: agentName });
-    await expect(option).not.toBeVisible();
-  }
-
-  /**
-   * Verify agent appears in marketplace dropdown
-   */
-  async expectAgentInDropdown(agentName: string): Promise<void> {
-    const option = this.page.getByRole("option", { name: agentName });
-    await expect(option).toBeVisible();
   }
 }

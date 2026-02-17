@@ -1,6 +1,8 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/roles.fixture";
 import { AgentPage } from "../../pages/Agent";
+import { MarketplacePage } from "../../pages/Marketplace";
+import { PublicMarketplacePage } from "../../pages/PublicMarketplace";
 import { AgentDataFactory } from "../data/agentDataFactory";
 
 test.describe("Agent Management Tests", () => {
@@ -76,7 +78,10 @@ test.describe("Agent Management Tests", () => {
 
   test("Admin can activate/deactivate agent and verify marketplace filtering", async ({
     page,
+    adminPage,
   }) => {
+    const marketplace = new MarketplacePage(adminPage);
+
     // CREATE AGENT
     await agent.createAgent(
       agentData.name,
@@ -94,11 +99,11 @@ test.describe("Agent Management Tests", () => {
     await agent.expectAgentInactive(agentData.name);
 
     // VERIFY DEACTIVATED AGENT NOT IN MARKETPLACE DROPDOWN
-    await agent.navigateToMarketplace();
-    await agent.startCreateListing();
-    await agent.openAgentDropdown();
-    await agent.expectAgentNotInDropdown(agentData.name);
-    await agent.closeListingModal();
+    await marketplace.navigateToMarketplace();
+    await marketplace.startCreateListing();
+    await marketplace.openAgentDropdown();
+    await marketplace.expectAgentNotInDropdown(agentData.name);
+    await marketplace.closeListingModal();
 
     // REACTIVATE AGENT
     await agent.navigateToAgents2();
@@ -106,14 +111,39 @@ test.describe("Agent Management Tests", () => {
     await agent.expectAgentActive(agentData.name);
 
     // VERIFY REACTIVATED AGENT APPEARS IN MARKETPLACE DROPDOWN
-    await agent.navigateToMarketplace();
-    await agent.startCreateListing();
-    await agent.openAgentDropdown();
-    await agent.expectAgentInDropdown(agentData.name);
-    await agent.closeListingModal();
+    await marketplace.navigateToMarketplace();
+    await marketplace.startCreateListing();
+    await marketplace.openAgentDropdown();
+    await marketplace.expectAgentInDropdown(agentData.name);
+    await marketplace.closeListingModal();
 
     // CLEANUP: Delete agent
     await agent.navigateToAgents2();
+    await agent.deleteAgent(agentData.name);
+    await agent.expectAgentNotInTable(agentData.name);
+  });
+  test("Agent created by Admin is not visible to other users until published", async ({
+    adminPage,
+    userPage,
+  }) => {
+    // CREATE AGENT
+    await agent.createAgent(
+      agentData.name,
+      agentData.description,
+      agentData.systemPrompt,
+      agentData.tags,
+    );
+
+    // VERIFY CREATED
+    await agent.expectAgentExists(agentData.name);
+    await agent.expectAgentInTable(agentData.name);
+    await agent.expectAgentActive(agentData.name);
+
+    // verify by user - agent should not be visible in public marketplace
+    const publicMarketplace = new PublicMarketplacePage(userPage);
+    await publicMarketplace.verifyAgentNotFound(agentData.name);
+
+    // DELETE
     await agent.deleteAgent(agentData.name);
     await agent.expectAgentNotInTable(agentData.name);
   });

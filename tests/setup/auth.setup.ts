@@ -74,9 +74,7 @@ setup("User login", async ({ page }) => {
   await expect(submitButton).toBeEnabled();
 
   await submitButton.click();
-
-  await submitButton.click();
-  await usernameInput.waitFor({ state: "visible" });
+  await passwordInput.waitFor({ state: "visible" });
   await passwordInput.fill(process.env.USER_PASSWORD!);
   await expect(submitButton).toBeEnabled();
   await submitButton.click();
