@@ -37,7 +37,7 @@ setup("Admin login", async ({ page }) => {
   await page.getByRole("button", { name: "Next" }).click();
   await page.locator("#i0118").fill(process.env.MY_PASSWORD!);
   await page
-    .getByRole("textbox", { name: "Enter the password for febin." })
+    .getByRole("textbox", { name: /password/i})
     .click({
       modifiers: ["ControlOrMeta"],
     });
