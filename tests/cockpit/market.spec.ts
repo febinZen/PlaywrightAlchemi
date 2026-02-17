@@ -3,17 +3,20 @@ import { test } from "../fixtures/roles.fixture";
 import { AgentDataFactory } from "../data/agentDataFactory";
 import { AgentPage } from "../../pages/Agent";
 import { MarketPage } from "../../pages/Market";
+import { MarketplacePage } from "../../pages/Marketplace";
 
 test.describe("Marketplace Agent Management Tests", () => {
   let agentData: ReturnType<typeof AgentDataFactory.generateAgentData>;
   let agent: AgentPage;
   let market: MarketPage;
+  let marketplace: MarketplacePage;
 
   test.beforeEach(async ({ adminPage }) => {
     await adminPage.goto("/spaces");
     agentData = AgentDataFactory.generateAgentData();
     agent = new AgentPage(adminPage);
     market = new MarketPage(adminPage);
+    marketplace = new MarketplacePage(adminPage);
     await agent.navigateToAgents();
   });
 
@@ -34,9 +37,9 @@ test.describe("Marketplace Agent Management Tests", () => {
     await agent.expectAgentActive(agentData.name);
 
     // VERIFY REACTIVATED AGENT APPEARS IN MARKETPLACE DROPDOWN & CREATE LISTING
-    await agent.navigateToMarketplace();
-    await agent.startCreateListing();
-    await agent.openAgentDropdown();
+    await marketplace.navigateToMarketplace();
+    await marketplace.startCreateListing();
+    await marketplace.openAgentDropdown();
     await market.createListingForAgent(agentData.name, "sfdsfewe4e", "febin");
 
     // CLEANUP: Delete agent from Marketplace
@@ -64,20 +67,20 @@ test.describe("Marketplace Agent Management Tests", () => {
     await agent.expectAgentActive(agentData.name);
 
     // VERIFY REACTIVATED AGENT APPEARS IN MARKETPLACE DROPDOWN
-    await agent.navigateToMarketplace();
-    await agent.startCreateListing();
-    await agent.openAgentDropdown();
-    await agent.expectAgentInDropdown(agentData.name);
+    await marketplace.navigateToMarketplace();
+    await marketplace.startCreateListing();
+    await marketplace.openAgentDropdown();
+    await marketplace.expectAgentInDropdown(agentData.name);
 
     //   await page.getByRole('link', { name: 'MarketPlace' }).click();
     //   await page.getByRole('button', { name: 'Create Listing' }).click();
     //   await page.getByRole('button', { name: 'Agent' }).click();
     //   await page.getByRole('combobox').filter({ hasText: 'Select an agent' }).click();
     await market.createListingForAgent(agentData.name, "sfdsfewe4e", "febin");
-    await agent.startCreateListing();
-    await agent.openAgentDropdown();
-    await agent.expectAgentNotInDropdown(agentData.name);
-    await agent.closeListingModal();
+    await marketplace.startCreateListing();
+    await marketplace.openAgentDropdown();
+    await marketplace.expectAgentNotInDropdown(agentData.name);
+    await marketplace.closeListingModal();
 
     // CLEANUP: Delete agent from Marketplace
     await market.deleteListing(agentData.name);
@@ -103,9 +106,9 @@ test.describe("Marketplace Agent Management Tests", () => {
     await agent.expectAgentActive(agentData.name);
 
     // VERIFY REACTIVATED AGENT APPEARS IN MARKETPLACE DROPDOWN & CREATE LISTING
-    await agent.navigateToMarketplace();
-    await agent.startCreateListing();
-    await agent.openAgentDropdown();
+    await marketplace.navigateToMarketplace();
+    await marketplace.startCreateListing();
+    await marketplace.openAgentDropdown();
     await market.createListingForAgent(agentData.name, "sfdsfewe4e", "febin");
 
     // verify listing row and status
@@ -141,10 +144,10 @@ test.describe("Marketplace Agent Management Tests", () => {
     await agent.expectAgentActive(agentData.name);
 
     // VERIFY REACTIVATED AGENT APPEARS IN MARKETPLACE DROPDOWN
-    await agent.navigateToMarketplace();
-    await agent.startCreateListing();
-    await agent.openAgentDropdown();
-    await agent.expectAgentInDropdown(agentData.name);
+    await marketplace.navigateToMarketplace();
+    await marketplace.startCreateListing();
+    await marketplace.openAgentDropdown();
+    await marketplace.expectAgentInDropdown(agentData.name);
 
     await market.createListingForAgent(agentData.name, "sfdsfewe4e", "febin");
     const row = adminPage.locator("tbody tr").filter({
@@ -197,10 +200,10 @@ test.describe("Marketplace Agent Management Tests", () => {
     await agent.expectAgentActive(agentData.name);
 
     // VERIFY REACTIVATED AGENT APPEARS IN MARKETPLACE DROPDOWN
-    await agent.navigateToMarketplace();
-    await agent.startCreateListing();
-    await agent.openAgentDropdown();
-    await agent.expectAgentInDropdown(agentData.name);
+    await marketplace.navigateToMarketplace();
+    await marketplace.startCreateListing();
+    await marketplace.openAgentDropdown();
+    await marketplace.expectAgentInDropdown(agentData.name);
 
     await market.createListingForAgent(agentData.name, "sfdsfewe4e", "febin");
 
@@ -243,9 +246,9 @@ test.describe("Marketplace Agent Management Tests", () => {
     await agent.expectAgentActive(agentData.name);
 
     // VERIFY REACTIVATED AGENT APPEARS IN MARKETPLACE DROPDOWN & CREATE LISTING
-    await agent.navigateToMarketplace();
-    await agent.startCreateListing();
-    await agent.openAgentDropdown();
+    await marketplace.navigateToMarketplace();
+    await marketplace.startCreateListing();
+    await marketplace.openAgentDropdown();
     await market.createListingForAgent(agentData.name, "sfdsfewe4e", "febin");
 
     const row = adminPage.locator("tbody tr").filter({
@@ -265,3 +268,4 @@ test.describe("Marketplace Agent Management Tests", () => {
     await agent.expectAgentNotInTable(agentData.name);
   });
 });
+
