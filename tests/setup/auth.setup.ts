@@ -90,3 +90,31 @@ setup("User login", async ({ page }) => {
     path: path.join(authPath, "user.json"),
   });
 });
+setup("User_02 login", async ({ page }) => {
+  await page.goto(process.env.BASE_URL + "/login");
+  const usernameInput = page.getByTestId("username-text-input");
+  const passwordInput = page.getByTestId("password-text-input");
+  const submitButton = page.getByTestId("submit-button");
+  // await usernameInput.fill(process.env.USER_EMAIL!);
+  // await submitButton.click();
+  await usernameInput.waitFor({ state: "visible" });
+  await usernameInput.fill(process.env.USER_EMAIL_02!, { timeout: 5000 });
+
+  await expect(usernameInput).toHaveValue(process.env.USER_EMAIL_02!);
+  // Wait until button becomes enabled
+  await expect(submitButton).toBeEnabled();
+
+  await submitButton.click();
+  await passwordInput.waitFor({ state: "visible" });
+  await passwordInput.fill(process.env.USER_PASSWORD_02!);
+  await expect(submitButton).toBeEnabled();
+  await submitButton.click();
+  await Promise.all([
+    page.waitForURL(/\/spaces$/), // waits until the URL matches
+    // submitButton.click(),
+  ]);
+
+  await page.context().storageState({
+    path: path.join(authPath, "user_02.json"),
+  });
+});
