@@ -46,5 +46,38 @@ export const REQUESTS_TEST_DATA: {
   statuses: ['Open', 'Closed'],
 };
 
-// derived value
+
+
+export const CREDIT_REQUEST_DATA = {
+  type: 'Credit Request',
+  subject: 'Requesting credits',
+  description: 'Automation test credit request',
+  credits: 28000,
+};
+
+export const REQUEST_PRIORITY_DATA = {
+  subject: CREDIT_REQUEST_DATA.subject,
+  initialPriorityButton: 'URGENT',
+  updatedPriority: 'IMPORTANT',
+  expectedPriorityCell: 'IMPORTANT',
+};
+
+export const REQUEST_CHAT_DATA = {
+  requestId: 'c7d9cad9-cb78-42e2-8d75-5d65184b1128',
+  requestTitle: CREDIT_REQUEST_DATA.subject,
+  adminMessage: 'hi',
+  userReply: 'fix my issue',
+  adminReply: 'Yeaah sure',
+};
+
+export const INTERNAL_NOTE_DATA = {
+  requestId: 'c7d9cad9-cb78-42e2-8d75-5d65184b1128',
+  requestTitle: CREDIT_REQUEST_DATA.subject,
+  internalMessage: `Internal-${Date.now()}`,
+};
+
+
+
+
+
 
