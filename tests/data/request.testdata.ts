@@ -50,7 +50,7 @@ export const REQUESTS_TEST_DATA: {
 
 export const CREDIT_REQUEST_DATA = {
   type: 'Credit Request',
-  subject: 'Requesting credits',
+  subject: `Test Credit Request 1`,
   description: 'Automation test credit request',
   credits: 28000,
 };
@@ -63,7 +63,7 @@ export const REQUEST_PRIORITY_DATA = {
 };
 
 export const REQUEST_CHAT_DATA = {
-  requestId: 'c7d9cad9-cb78-42e2-8d75-5d65184b1128',
+  requestId: '2d8b1857-8bd0-4f6d-b70e-f39b3b241e89',
   requestTitle: CREDIT_REQUEST_DATA.subject,
   adminMessage: 'hi',
   userReply: 'fix my issue',
@@ -71,7 +71,7 @@ export const REQUEST_CHAT_DATA = {
 };
 
 export const INTERNAL_NOTE_DATA = {
-  requestId: 'c7d9cad9-cb78-42e2-8d75-5d65184b1128',
+  requestId: '2d8b1857-8bd0-4f6d-b70e-f39b3b241e89',
   requestTitle: CREDIT_REQUEST_DATA.subject,
   internalMessage: `Internal-${Date.now()}`,
 };

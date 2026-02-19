@@ -17,6 +17,7 @@ export const test = base.extend<RoleFixtures>({
       storageState: adminStorage,
     });
     const page = await context.newPage();
+    await page.goto("/spaces");
     await use(page);
     await context.close();
   },
@@ -25,6 +26,7 @@ export const test = base.extend<RoleFixtures>({
       storageState: userStorage,
     });
     const page = await context.newPage();
+    await page.goto("/spaces");
     await use(page);
     await context.close();
   },
@@ -33,6 +35,7 @@ export const test = base.extend<RoleFixtures>({
       storageState: user02Storage,
     });
     const page = await context.newPage();
+    await page.goto("/spaces");
     await use(page);
     await context.close();
   },
