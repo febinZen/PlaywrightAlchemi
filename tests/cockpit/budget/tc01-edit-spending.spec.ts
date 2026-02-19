@@ -1,9 +1,10 @@
-import { test, expect } from '@playwright/test';
-import { BudgetPage } from '../../../pages/budget/budget.page';
-import { budgetTestData } from '../../data/budget.testdata';
+// import { test, expect } from '@playwright/test';
+import { test, expect } from "../../fixtures/roles.fixture";
+import { BudgetPage } from "../../../pages/budget/budget.page";
+import { budgetTestData } from "../../data/budget.testdata";
 
-test('TC01 - Edit Spending Limit', async ({ page }) => {
-  const budget = new BudgetPage(page);
+test("TC01 - Edit Spending Limit", async ({ adminPage }) => {
+  const budget = new BudgetPage(adminPage);
 
   await budget.navigate();
 
@@ -14,6 +15,5 @@ test('TC01 - Edit Spending Limit', async ({ page }) => {
   await budget.spendingInput().fill(value.toString());
   await budget.clickUpdate();
 
-  await expect(budget.groupRow(group))
-    .toContainText(value.toLocaleString());
+  await expect(budget.groupRow(group)).toContainText(value.toLocaleString());
 });

@@ -1,5 +1,4 @@
-import { expect } from "@playwright/test";
-import { test } from "../../fixtures/roles.fixture";
+import { test, expect } from "../../fixtures/roles.fixture";
 import { PublicWorkspacePage } from "../../../pages/nexus/PublicWorkspace";
 import { WorkspacePage } from "../../../pages/nexus/Workspace";
 import { WorkspaceDataFactory } from "../../data/nexus/workspaceDataFactory";

@@ -1,10 +1,9 @@
-import { test, expect } from '@playwright/test';
-import { BudgetPage } from '../../../pages/budget/budget.page';
-import { budgetTestData } from '../../data/budget.testdata';
+import { test, expect } from "../../fixtures/roles.fixture";
+import { BudgetPage } from "../../../pages/budget/budget.page";
+import { budgetTestData } from "../../data/budget.testdata";
 
-test('TC02 - Cancel Should Not Update Value', async ({ page }) => {
-
-  const budget = new BudgetPage(page);
+test("TC02 - Cancel Should Not Update Value", async ({ adminPage }) => {
+  const budget = new BudgetPage(adminPage);
   await budget.navigate();
 
   const group = budgetTestData.groups.devSecOps;
@@ -13,8 +12,8 @@ test('TC02 - Cancel Should Not Update Value', async ({ page }) => {
   const originalText = await row.textContent();
 
   await budget.clickEditForRow(group);
-  await budget.spendingInput().fill('5000');
+  await budget.spendingInput().fill("5000");
   await budget.clickCancel();
 
-  await expect(row).toHaveText(originalText || '');
+  await expect(row).toHaveText(originalText || "");
 });

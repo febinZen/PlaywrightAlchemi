@@ -1,18 +1,18 @@
-import { test, expect } from '@playwright/test';
-import { BudgetPage } from '../../../pages/budget/budget.page';
-import { EditPlanPage } from '../../../pages/budget/edit-plan.page';
-import { editPlanTestData } from '../../data/budget.testdata';
+// import { test, expect } from "@playwright/test";
+import { test, expect } from "../../fixtures/roles.fixture";
 
-test.describe('Edit Plan Workflow', () => {
+import { BudgetPage } from "../../../pages/budget/budget.page";
+import { EditPlanPage } from "../../../pages/budget/edit-plan.page";
+import { editPlanTestData } from "../../data/budget.testdata";
 
-  test.beforeEach(async ({ page }) => {
-    const budget = new BudgetPage(page);
+test.describe("Edit Plan Workflow", () => {
+  test.beforeEach(async ({ adminPage }) => {
+    const budget = new BudgetPage(adminPage);
     await budget.navigate();
   });
 
-  test('Update Plan Name', async ({ page }) => {
-
-    const edit = new EditPlanPage(page);
+  test("Update Plan Name", async ({ adminPage }) => {
+    const edit = new EditPlanPage(adminPage);
 
     await edit.open();
 
@@ -25,17 +25,15 @@ test.describe('Edit Plan Workflow', () => {
     await expect(edit.planNameInput()).toHaveValue(planName);
   });
 
-  test('Credits Arrow', async ({ page }) => {
-
-    const edit = new EditPlanPage(page);
+  test("Credits Arrow", async ({ adminPage }) => {
+    const edit = new EditPlanPage(adminPage);
 
     await edit.open();
     await edit.continueButton().click();
 
-    await edit.creditsInput().press('ArrowUp');
-    await edit.creditsInput().press('ArrowDown');
+    await edit.creditsInput().press("ArrowUp");
+    await edit.creditsInput().press("ArrowDown");
 
     await expect(edit.creditsInput()).toBeVisible();
   });
-
 });

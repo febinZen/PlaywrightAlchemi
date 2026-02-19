@@ -1,5 +1,4 @@
-import { expect } from "@playwright/test";
-import { test } from "../../fixtures/roles.fixture";
+import { test, expect } from "../../fixtures/roles.fixture";
 import { AgentDataFactory } from "../../data/nexus/agentDataFactory";
 import { AgentPage } from "../../../pages/nexus/Agent";
 import { MarketplacePage } from "../../../pages/nexus/Marketplace";

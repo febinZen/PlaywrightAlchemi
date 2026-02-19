@@ -1,57 +1,40 @@
-import { test as base, Page } from '@playwright/test';
-import path from 'path';
+import { test as base, Page, expect } from "@playwright/test";
+import path from "path";
 
 type RoleFixtures = {
   adminPage: Page;
   userPage: Page;
+  ownerA: Page;
 };
 
-const adminStorage = path.resolve(
-  __dirname,
-  '../.auth/admin.json'
-);
-
-const userStorage = path.resolve(
-  __dirname,
-  '../.auth/user.json'
-);
+const adminStorage = path.resolve(__dirname, "../setup/.auth/admin.json");
+const userStorage = path.resolve(__dirname, "../setup/.auth/user.json");
+const user02Storage = path.resolve(__dirname, "../setup/.auth/user_02.json");
 
 export const test = base.extend<RoleFixtures>({
-
-  // 🔐 ADMIN FIXTURE
   adminPage: async ({ browser }, use) => {
-
     const context = await browser.newContext({
       storageState: adminStorage,
-      baseURL: process.env.BASE_URL,
     });
-
     const page = await context.newPage();
-
-    await page.goto('/spaces');
-
     await use(page);
-
     await context.close();
   },
-
-  // 👤 USER FIXTURE
   userPage: async ({ browser }, use) => {
-
     const context = await browser.newContext({
       storageState: userStorage,
-      baseURL: process.env.BASE_URL,
     });
-
     const page = await context.newPage();
-
-    await page.goto('/spaces');
-
     await use(page);
-
     await context.close();
   },
-
+  ownerA: async ({ browser }, use) => {
+    const context = await browser.newContext({
+      storageState: user02Storage,
+    });
+    const page = await context.newPage();
+    await use(page);
+    await context.close();
+  },
 });
-
-export { expect } from '@playwright/test';
+export { expect };

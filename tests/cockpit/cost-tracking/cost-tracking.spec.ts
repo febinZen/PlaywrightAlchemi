@@ -1,17 +1,15 @@
-import { test, expect } from '@playwright/test';
-import { CostTrackingPage } from '../../../pages/cost-tracking/cost-tracking.page';
-import { costTrackingTestData } from '../../testdata/cost-tracking.testdata';
+import { test, expect } from "../../fixtures/roles.fixture";
+import { CostTrackingPage } from "../../../pages/cost-tracking/cost-tracking.page";
+import { costTrackingTestData } from "../../data/cost-tracking.testdata";
 
-test.describe('Cost Tracking Module', () => {
-
-  test.beforeEach(async ({ page }) => {
-    const cost = new CostTrackingPage(page);
+test.describe("Cost Tracking Module", () => {
+  test.beforeEach(async ({ adminPage }) => {
+    const cost = new CostTrackingPage(adminPage);
     await cost.navigate();
   });
 
-  test('Toggle Metrics', async ({ page }) => {
-
-    const cost = new CostTrackingPage(page);
+  test("Toggle Metrics", async ({ adminPage }) => {
+    const cost = new CostTrackingPage(adminPage);
 
     for (const metric of costTrackingTestData.metrics) {
       await cost.metricButton(metric).click();
@@ -19,16 +17,15 @@ test.describe('Cost Tracking Module', () => {
     }
   });
 
-  test('Search Table', async ({ page }) => {
-
-    const cost = new CostTrackingPage(page);
+  test("Search Table", async ({ adminPage }) => {
+    const cost = new CostTrackingPage(adminPage);
 
     await cost.searchBox().fill(costTrackingTestData.search.valid);
-    await expect(cost.searchBox())
-      .toHaveValue(costTrackingTestData.search.valid);
+    await expect(cost.searchBox()).toHaveValue(
+      costTrackingTestData.search.valid,
+    );
 
     await cost.clearSearch().click();
-    await expect(cost.searchBox()).toHaveValue('');
+    await expect(cost.searchBox()).toHaveValue("");
   });
-
 });

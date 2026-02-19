@@ -1,10 +1,10 @@
-import { test, expect } from '../../fixtures/roles.fixture';
-import { CockpitRequestPage } from '../../../pages/request/request.page';
-import { REQUEST_PRIORITY_DATA } from '../../data/request.testdata';
+import { test, expect } from "../../fixtures/roles.fixture";
+import { CockpitRequestPage } from "../../../pages/request/request.page";
+import { REQUEST_PRIORITY_DATA } from "../../data/request.testdata";
 
-test('Priority change reflects in Cockpit request table',
-async ({ adminPage }) => {
-
+test("Priority change reflects in Cockpit request table", async ({
+  adminPage,
+}) => {
   const cockpit = new CockpitRequestPage(adminPage);
 
   // ==========================
@@ -13,7 +13,7 @@ async ({ adminPage }) => {
   await cockpit.navigate();
 
   //search for the request to ensure it exists before proceeding
-  await adminPage.waitForLoadState('networkidle');
+  await adminPage.waitForLoadState("networkidle");
   await cockpit.searchRequest(REQUEST_PRIORITY_DATA.subject);
 
   // ==========================
@@ -23,13 +23,13 @@ async ({ adminPage }) => {
 
   // 🔹 Get current priority
   const currentPriority = await cockpit.getCurrentPriority();
-  console.log('Current Priority:', currentPriority);
+  console.log("Current Priority:", currentPriority);
 
   // 🔹 Decide new priority dynamically
-  let newPriority =  currentPriority === 'Urgent' ? 'Important' : 'Urgent';
+  let newPriority = currentPriority === "Urgent" ? "Important" : "Urgent";
 
-  if (currentPriority.toLowerCase().includes('urgent')) {
-    newPriority = 'Important';
+  if (currentPriority.toLowerCase().includes("urgent")) {
+    newPriority = "Important";
   }
 
   // 🔹 Change priority
@@ -43,15 +43,15 @@ async ({ adminPage }) => {
   // ==========================
   // 🔹 Search for Request
   // ==========================
-  await cockpit.searchRequest(REQUEST_PRIORITY_DATA.subject);   
+  await cockpit.searchRequest(REQUEST_PRIORITY_DATA.subject);
 
   // ==========================
   // 🔹 Validate Updated Priority
   // ==========================
-   // 🔹 Validate updated value in table row
-  const tableText = await cockpit.getPriorityFromTable(REQUEST_PRIORITY_DATA.subject);
+  // 🔹 Validate updated value in table row
+  const tableText = await cockpit.getPriorityFromTable(
+    REQUEST_PRIORITY_DATA.subject,
+  );
 
-  expect(tableText.toLowerCase())
-    .toContain(newPriority.toLowerCase());
-
+  expect(tableText.toLowerCase()).toContain(newPriority.toLowerCase());
 });
