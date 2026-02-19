@@ -6,6 +6,8 @@ test("Admin & User can see each other chat and reply", async ({
   adminPage,
   userPage,
 }) => {
+  await adminPage.goto("/spaces");
+  await userPage.goto("/spaces");
   const adminChat = new RequestChatPage(adminPage);
   const userChat = new RequestChatPage(userPage);
 

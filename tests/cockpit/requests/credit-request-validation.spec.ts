@@ -1,14 +1,20 @@
-import { test, expect } from '../../fixtures/roles.fixture';
-import { UserRequestPage } from '../../../pages/request/create-request.page';
-import { CockpitRequestPage } from '../../../pages/request/request.page';
-import { CREDIT_REQUEST_DATA, REQUEST_PRIORITY_DATA } from '../../data/request.testdata';
+import { test, expect } from "../../fixtures/roles.fixture";
+import { UserRequestPage } from "../../../pages/request/create-request.page";
+import { CockpitRequestPage } from "../../../pages/request/request.page";
+import {
+  CREDIT_REQUEST_DATA,
+  REQUEST_PRIORITY_DATA,
+} from "../../data/request.testdata";
 
-test('User creates Credit Request → Admin sees it in Cockpit',
-async ({ userPage, adminPage }) => {
-
+test("User creates Credit Request → Admin sees it in Cockpit", async ({
+  userPage,
+  adminPage,
+}) => {
   // =====================================
   // 👤 USER CREATES REQUEST
   // =====================================
+  await adminPage.goto("/spaces");
+  await userPage.goto("/spaces");
   const userRequest = new UserRequestPage(userPage);
   const cockpit = new CockpitRequestPage(adminPage);
 
@@ -31,11 +37,8 @@ async ({ userPage, adminPage }) => {
 
   await cockpitRequests.navigate();
 
-  await adminPage.waitForLoadState('networkidle');
-   await cockpit.searchRequest(CREDIT_REQUEST_DATA.subject); 
+  await adminPage.waitForLoadState("networkidle");
+  await cockpit.searchRequest(CREDIT_REQUEST_DATA.subject);
 
-  await expect(
-  cockpit.requestRow(CREDIT_REQUEST_DATA.subject)
-).toBeVisible();
-
+  await expect(cockpit.requestRow(CREDIT_REQUEST_DATA.subject)).toBeVisible();
 });
