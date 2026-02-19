@@ -75,17 +75,12 @@ export default defineConfig({
   projects: [
     { name: "setup", testMatch: /auth\.setup\.ts/, retries: 2 },
     {
-      name: "admin",
+      name: "cockpit",
 
       testMatch: /.*\.spec\.ts/,
 
       dependencies: ["setup"],
     },
-    // {
-    //   name: "user",
-    //   use: { storageState: "playwright/.auth/user.json" },
-    //   dependencies: ["setup"],
-    // },
   ],
 
   /* Run your local dev server before starting the tests */
