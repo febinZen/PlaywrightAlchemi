@@ -15,6 +15,7 @@ dotenv.config();
  */
 export default defineConfig({
   testDir: "./tests",
+  globalSetup: require.resolve("./tests/auth.setup.ts"),
   /* Run tests in files in parallel */
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -29,6 +30,7 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     baseURL: process.env.BASE_URL,
+     storageState: "playwright/.auth/admin.json",  // default
     trace: "on-first-retry",
     screenshot: "only-on-failure",
 
@@ -73,18 +75,19 @@ export default defineConfig({
   //   // },
   // ],
   projects: [
-    { name: "setup", testMatch: /auth\.setup\.ts/ },
-    {
+   {
       name: "admin",
-
-      testMatch: /.*\.spec\.ts/,
-
-      dependencies: ["setup"],
+      testMatch: /cockpit\/.*\.ts/,
+      use: {
+        storageState: "playwright/.auth/admin.json",
+      },
     },
     // {
     //   name: "user",
-    //   use: { storageState: "playwright/.auth/user.json" },
-    //   dependencies: ["setup"],
+    //   testMatch: /cockpit\/.*\.ts/,
+    //   use: {
+    //     storageState: "playwright/.auth/user.json",
+    //   },
     // },
   ],
 
