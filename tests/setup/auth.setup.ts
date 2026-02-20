@@ -28,7 +28,7 @@ setup("Admin login", async ({ page }) => {
 
   await expect(usernameInput).toHaveValue(process.env.ADMIN_EMAIL!);
 
-  // // Wait until button becomes enabled
+  // Wait until button becomes enabled
   await expect(submitButton).toBeEnabled();
 
   await submitButton.click();
@@ -40,7 +40,9 @@ setup("Admin login", async ({ page }) => {
     .fill(process.env.MY_EMAIL!);
   await page.getByRole("button", { name: "Next" }).click();
   await page.locator("#i0118").fill(process.env.MY_PASSWORD!);
-  await page.getByRole("textbox", { name: /password/i }).click();
+  await page.getByRole("textbox", { name: /password/i }).click({
+    modifiers: ["ControlOrMeta"],
+  });
   await page.getByRole("button", { name: "Sign in" }).click();
   await page.getByRole("button", { name: "No" }).click();
 
@@ -67,12 +69,12 @@ setup("User login", async ({ page }) => {
   const submitButton = page.getByTestId("submit-button");
   // await usernameInput.fill(process.env.USER_EMAIL!);
   // await submitButton.click();
-  // await usernameInput.waitFor({ state: "visible" });
+  await usernameInput.waitFor({ state: "visible" });
   await usernameInput.fill(process.env.USER_EMAIL!, { timeout: 5000 });
 
-  // await expect(usernameInput).toHaveValue(process.env.USER_EMAIL!);
-  // // Wait until button becomes enabled
-  // await expect(submitButton).toBeEnabled();
+  await expect(usernameInput).toHaveValue(process.env.USER_EMAIL!);
+  // Wait until button becomes enabled
+  await expect(submitButton).toBeEnabled();
 
   await submitButton.click();
   await passwordInput.waitFor({ state: "visible" });
