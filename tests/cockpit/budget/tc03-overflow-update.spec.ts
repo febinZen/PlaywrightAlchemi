@@ -1,10 +1,12 @@
 import { test, expect } from "../../fixtures/roles.fixture";
 import { BudgetPage } from "../../../pages/Cockpit/budget/budget.page";
 import { budgetTestData } from "../../data/budget.testdata";
+import { CockpitPage } from "../../../pages/Cockpit/cockpit.page";
 
 test("TC03 - Overflow + Spending Limit Update", async ({ adminPage }) => {
   const budget = new BudgetPage(adminPage);
-  await budget.navigate();
+  const cockpit = new CockpitPage(adminPage);
+  await cockpit.navigateToCockpitMenu(budgetTestData.menuName);
 
   const member = budgetTestData.members.fiona;
   const newLimit = budgetTestData.spendingLimits.valid.memberUpdate;

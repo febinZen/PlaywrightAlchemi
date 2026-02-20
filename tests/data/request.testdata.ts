@@ -4,6 +4,7 @@ reply: string;
 div?: string;
 };
 export const REQUESTS_TEST_DATA: {
+  menuName: string;
   columnHeaders: string[];
   request: {
     id: string;
@@ -21,6 +22,7 @@ export const REQUESTS_TEST_DATA: {
   };
   statuses: string[];
 } = {
+  menuName: 'Requests',
   columnHeaders: ['TICKET DETAILS', 'PRIORITY', 'CREATED'],
 
   request: {

@@ -1,4 +1,5 @@
 export const NOTIFICATIONS_TEST_DATA = {
+  menuName: 'Notifications',
   columnHeaders: ['TEMPLATE', 'EVENT'],
   templates: [
     {

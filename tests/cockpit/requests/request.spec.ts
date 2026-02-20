@@ -10,3 +10,8 @@ test("Request Management", async ({ adminPage }) => {
 
   await request.commentBox().fill(REQUESTS_TEST_DATA.messages.comment);
 });
+// give me the breadcrumbs design for this test case in a simple format
+// Admin > Cockpit > Requests > Open Request
+//   - Navigate to Requests Page
+//   - Open a specific request by title
+//   - Fill the comment box with a message
