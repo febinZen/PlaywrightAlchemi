@@ -1,5 +1,5 @@
 import { test, expect } from "../../fixtures/roles.fixture";
-import { BudgetPage } from "../../../pages/budget/budget.page";
+import { BudgetPage } from "../../../pages/Cockpit/budget/budget.page";
 import { budgetTestData } from "../../data/budget.testdata";
 
 test("TC05 - Invalid Spending Limit Validation", async ({ adminPage }) => {

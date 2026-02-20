@@ -1,5 +1,5 @@
 import { test, expect } from "../../fixtures/roles.fixture";
-import { GroupsTeamsPage } from "../../../pages/groups-teams/groups-teams.page";
+import { GroupsTeamsPage } from "../../../pages/Cockpit/groups-teams/groups-teams.page";
 import { groupsTeamsTestData } from "../../data/groups-teams.testdata";
 
 test.describe("Groups & Teams Module", () => {

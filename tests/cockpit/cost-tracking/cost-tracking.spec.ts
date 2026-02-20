@@ -1,5 +1,5 @@
 import { test, expect } from "../../fixtures/roles.fixture";
-import { CostTrackingPage } from "../../../pages/cost-tracking/cost-tracking.page";
+import { CostTrackingPage } from "../../../pages/Cockpit/cost-tracking/cost-tracking.page";
 import { costTrackingTestData } from "../../data/cost-tracking.testdata";
 
 test.describe("Cost Tracking Module", () => {

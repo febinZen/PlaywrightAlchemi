@@ -1,8 +1,8 @@
 import { test, expect } from "../../fixtures/roles.fixture";
 import { AgentDataFactory } from "../../data/nexus/agentDataFactory";
-import { AgentPage } from "../../../pages/nexus/Agent";
-import { MarketplacePage } from "../../../pages/nexus/Marketplace";
-import { PublicMarketplacePage } from "../../../pages/nexus/PublicMarketplace";
+import { AgentPage } from "../../../pages/Cockpit/nexus/Agent";
+import { MarketplacePage } from "../../../pages/Cockpit/nexus/Marketplace";
+import { PublicMarketplacePage } from "../../../pages/Cockpit/nexus/PublicMarketplace";
 
 test.describe("Marketplace Agent Management Tests", () => {
   let agentData: ReturnType<typeof AgentDataFactory.generateAgentData>;

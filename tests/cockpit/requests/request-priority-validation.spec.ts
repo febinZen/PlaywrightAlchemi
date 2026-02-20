@@ -1,5 +1,5 @@
 import { test, expect } from "../../fixtures/roles.fixture";
-import { CockpitRequestPage } from "../../../pages/request/request.page";
+import { CockpitRequestPage } from "../../../pages/Cockpit/request/request.page";
 import { REQUEST_PRIORITY_DATA } from "../../data/request.testdata";
 
 test("Priority change reflects in Cockpit request table", async ({

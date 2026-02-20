@@ -1,5 +1,5 @@
 import { test, expect } from '../../fixtures/roles.fixture';
-import { RequestChatPage } from '../../../pages/request/request-chat.page';
+import { RequestChatPage } from '../../../pages/Cockpit/request/request-chat.page';
 import { REQUEST_CHAT_DATA } from '../../data/request.testdata';
 
 test('Admin & User can see each other chat and reply',

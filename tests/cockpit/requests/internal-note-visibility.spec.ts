@@ -1,5 +1,5 @@
 import { test, expect } from "../../fixtures/roles.fixture";
-import { RequestChatPage } from "../../../pages/request/request-chat.page";
+import { RequestChatPage } from "../../../pages/Cockpit/request/request-chat.page";
 import { INTERNAL_NOTE_DATA } from "../../data/request.testdata";
 
 test("Admin internal note should NOT be visible to user", async ({
@@ -20,6 +20,7 @@ test("Admin internal note should NOT be visible to user", async ({
   await userPage.waitForLoadState("networkidle");
 
   await userChat.openSupportTickets();
+  await userChat.searchRequest(INTERNAL_NOTE_DATA.requestTitle);
   await userChat.openRequest(INTERNAL_NOTE_DATA.requestTitle);
 
   await expect(

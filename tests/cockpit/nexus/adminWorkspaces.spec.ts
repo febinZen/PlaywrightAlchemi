@@ -1,6 +1,6 @@
 import { test, expect } from "../../fixtures/roles.fixture";
-import { PublicWorkspacePage } from "../../../pages/nexus/PublicWorkspace";
-import { WorkspacePage } from "../../../pages/nexus/Workspace";
+import { PublicWorkspacePage } from "../../../pages/Cockpit/nexus/PublicWorkspace";
+import { WorkspacePage } from "../../../pages/Cockpit/nexus/Workspace";
 import { WorkspaceDataFactory } from "../../data/nexus/workspaceDataFactory";
 
 test.describe("Workspace Management Tests", () => {

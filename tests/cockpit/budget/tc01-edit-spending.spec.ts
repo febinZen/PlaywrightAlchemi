@@ -1,6 +1,6 @@
 // import { test, expect } from '@playwright/test';
 import { test, expect } from "../../fixtures/roles.fixture";
-import { BudgetPage } from "../../../pages/budget/budget.page";
+import { BudgetPage } from "../../../pages/Cockpit/budget/budget.page";
 import { budgetTestData } from "../../data/budget.testdata";
 
 test("TC01 - Edit Spending Limit", async ({ adminPage }) => {

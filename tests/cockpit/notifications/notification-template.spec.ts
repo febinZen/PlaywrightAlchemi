@@ -1,5 +1,5 @@
 import { test, expect } from "../../fixtures/roles.fixture";
-import { NotificationTemplatePage } from "../../../pages/notifications/notifications-template.page";
+import { NotificationTemplatePage } from "../../../pages/Cockpit/notifications/notifications-template.page";
 import { NOTIFICATIONS_TEST_DATA } from "../../data/notification-template.testdata";
 
 test("Notification Templates Test", async ({ adminPage }) => {

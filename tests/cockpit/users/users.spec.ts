@@ -1,5 +1,5 @@
 import { test, expect } from "../../fixtures/roles.fixture";
-import { UsersPage } from "../../../pages/users/users.page";
+import { UsersPage } from "../../../pages/Cockpit/users/users.page";
 import { USERS_TEST_DATA } from "../../data/users.testdata";
 
 test("User Table Test", async ({ adminPage }) => {

@@ -1,5 +1,5 @@
 import { test, expect } from "../../fixtures/roles.fixture";
-import { CockpitRequestPage } from "../../../pages/request/request.page";
+import { CockpitRequestPage } from "../../../pages/Cockpit/request/request.page";
 import { REQUESTS_TEST_DATA } from "../../data/request.testdata";
 
 test("Request Management", async ({ adminPage }) => {

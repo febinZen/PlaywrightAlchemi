@@ -1,7 +1,7 @@
 import { test, expect } from "../../fixtures/roles.fixture";
-import { AgentPage } from "../../../pages/nexus/Agent";
-import { MarketplacePage } from "../../../pages/nexus/Marketplace";
-import { PublicMarketplacePage } from "../../../pages/nexus/PublicMarketplace";
+import { AgentPage } from "../../../pages/Cockpit/nexus/Agent";
+import { MarketplacePage } from "../../../pages/Cockpit/nexus/Marketplace";
+import { PublicMarketplacePage } from "../../../pages/Cockpit/nexus/PublicMarketplace";
 import { AgentDataFactory } from "../../data/nexus/agentDataFactory";
 
 test.describe("Agent Management Tests", () => {

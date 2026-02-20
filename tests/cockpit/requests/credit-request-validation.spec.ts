@@ -1,6 +1,6 @@
 import { test, expect } from "../../fixtures/roles.fixture";
-import { UserRequestPage } from "../../../pages/request/create-request.page";
-import { CockpitRequestPage } from "../../../pages/request/request.page";
+import { UserRequestPage } from "../../../pages/Cockpit/request/create-request.page";
+import { CockpitRequestPage } from "../../../pages/Cockpit/request/request.page";
 import {
   CREDIT_REQUEST_DATA,
   REQUEST_PRIORITY_DATA,

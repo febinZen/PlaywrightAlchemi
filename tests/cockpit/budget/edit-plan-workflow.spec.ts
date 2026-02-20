@@ -1,8 +1,8 @@
 // import { test, expect } from "@playwright/test";
 import { test, expect } from "../../fixtures/roles.fixture";
 
-import { BudgetPage } from "../../../pages/budget/budget.page";
-import { EditPlanPage } from "../../../pages/budget/edit-plan.page";
+import { BudgetPage } from "../../../pages/Cockpit/budget/budget.page";
+import { EditPlanPage } from "../../../pages/Cockpit/budget/edit-plan.page";
 import { editPlanTestData } from "../../data/budget.testdata";
 
 test.describe("Edit Plan Workflow", () => {
