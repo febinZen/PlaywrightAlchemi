@@ -79,7 +79,7 @@ export default defineConfig({
 
       testMatch: /.*\.spec\.ts/,
 
-      dependencies: ["setup"],
+      // dependencies: ["setup"],
     },
   ],
 

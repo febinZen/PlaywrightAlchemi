@@ -20,7 +20,7 @@ export const USERS_TEST_DATA = {
 
 export const INVITE_TEST_DATA = {
   inviteUser: {
-    email: 'lkjehoz@gmail.com',
+    email: ['test3@corp.com', 'test4@corp.com'],
     role: 'USER',
   },
 

@@ -39,7 +39,7 @@ export class UserTablePage {
   // Accept Invite
   async acceptInvite(email: string) {
     await this.page.getByText(email).first().click();
-    await this.page.locator('[id^="radix-"]').click();
+    await this.page.getByRole('row', { name: email }).getByRole('button').click();
     await this.page
       .getByRole('menuitem', { name: /Accept/i })
       .locator('div')

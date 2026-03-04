@@ -22,7 +22,8 @@ export class BudgetPage {
   }
 
   async clickEditForRow(name: string) {
-    await this.groupRow(name).getByRole('button').nth(1).click();
+    await this.groupRow(name).getByRole('button').nth(0).click();
+    
   }
 
   spendingInput(): Locator {

@@ -59,7 +59,7 @@ export class RequestChatPage {
 
  async openRequest(title: string) {
   await this.page.getByRole('heading', { name: title }).click();
-  await this.page.waitForLoadState('networkidle');
+  // await this.page.waitForLoadState('networkidle');
 }
 
   async replyToLatestMessage(replyText: string) {
