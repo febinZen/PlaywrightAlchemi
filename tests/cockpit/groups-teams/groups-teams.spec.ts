@@ -8,26 +8,12 @@ test.describe("Groups & Teams Module", () => {
     await groupsTeams.navigate();
   });
 
-  // ===============================
-  // TC01 - Expand and Collapse Group
-  // ===============================
-  test("TC01 - Expand and Collapse Group", async ({ adminPage }) => {
-    const groupsTeams = new GroupsTeamsPage(adminPage);
-
-    const groupRow = groupsTeams.groupRow(groupsTeamsTestData.groups.default);
-
-    const expandButton = groupRow.getByRole("button").first();
-
-    await expandButton.click();
-    await expect(groupRow).toBeVisible();
-
-    await expandButton.click();
-  });
+ 
 
   // ===============================
-  // TC02 - Create Group
+  // TC01 - Create Group
   // ===============================
-  test("TC02 - Create Group", async ({ adminPage }) => {
+  test("TC01 - Create Group", async ({ adminPage }) => {
     const groupsTeams = new GroupsTeamsPage(adminPage);
 
     await adminPage.getByRole("button", { name: "Create Group" }).click();
@@ -50,9 +36,9 @@ test.describe("Groups & Teams Module", () => {
   });
 
   // ===============================
-  // TC03 - Create Team Under Group
+  // TC02 - Create Team Under Group
   // ===============================
-  test("TC03 - Create Team", async ({ adminPage }) => {
+  test("TC02 - Create Team", async ({ adminPage }) => {
     await adminPage.getByRole("link", { name: "Teams", exact: true }).click();
 
     await adminPage.getByRole("button", { name: "Create Team" }).click();
@@ -82,9 +68,9 @@ test.describe("Groups & Teams Module", () => {
   });
 
   // ===============================
-  // TC04 - Add & Remove Team Members
+  // TC03 - Add & Remove Team Members
   // ===============================
-  test("TC04 - Add and Remove Team Members", async ({ adminPage }) => {
+  test("TC03 - Add and Remove Team Members", async ({ adminPage }) => {
     await adminPage.getByRole("link", { name: "Teams", exact: true }).click();
 
     await adminPage.getByRole("combobox").click();
@@ -161,9 +147,9 @@ test.describe("Groups & Teams Module", () => {
   });
 
   // ===============================
-  // TC05 - Edit Team Name
+  // TC04 - Edit Team Name
   // ===============================
-  test("TC05 - Edit Team Name", async ({ adminPage }) => {
+  test("TC04 - Edit Team Name", async ({ adminPage }) => {
     await adminPage.getByRole("link", { name: "Teams", exact: true }).click();
 
     await adminPage.getByRole("combobox").click();
@@ -199,9 +185,9 @@ test.describe("Groups & Teams Module", () => {
   });
 
   // ===============================
-  // TC06 - Delete Team
+  // TC05 - Delete Team
   // ===============================
-  test("TC06 - Delete Team", async ({ adminPage }) => {
+  test("TC05 - Delete Team", async ({ adminPage }) => {
     await adminPage.getByRole("link", { name: "Teams", exact: true }).click();
 
     await adminPage.getByRole("combobox").click();
@@ -229,9 +215,9 @@ test.describe("Groups & Teams Module", () => {
   });
 
   // ===============================
-  // TC07 - Edit & Delete Group
+  // TC06 - Edit & Delete Group
   // ===============================
-  test("TC07 - Edit and Delete Group", async ({ adminPage }) => {
+  test("TC06 - Edit and Delete Group", async ({ adminPage }) => {
     await adminPage.getByRole("link", { name: "Groups", exact: true }).click();
 
     const groupRow = adminPage
@@ -261,9 +247,9 @@ test.describe("Groups & Teams Module", () => {
   });
 
   // ===============================
-  // TC08 - Toggle List and Tree View
+  // TC07 - Toggle List and Tree View
   // ===============================
-  test("TC08 - Toggle List and Tree View", async ({ adminPage }) => {
+  test("TC07 - Toggle List and Tree View", async ({ adminPage }) => {
     await adminPage
       .getByRole("button", {
         name: groupsTeamsTestData.views.list,

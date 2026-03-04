@@ -1,14 +1,17 @@
 // import { test, expect } from "@playwright/test";
 import { test, expect } from "../../fixtures/roles.fixture";
-
+import { CockpitPage } from "../../../pages/Cockpit/cockpit.page";  
 import { BudgetPage } from "../../../pages/Cockpit/budget/budget.page";
 import { EditPlanPage } from "../../../pages/Cockpit/budget/edit-plan.page";
-import { editPlanTestData } from "../../data/budget.testdata";
+import { editPlanTestData, budgetTestData } from "../../data/budget.testdata";
 
 test.describe("Edit Plan Workflow", () => {
   test.beforeEach(async ({ adminPage }) => {
     const budget = new BudgetPage(adminPage);
-    await budget.navigate();
+    const cockpit = new CockpitPage(adminPage);
+
+    await cockpit.navigateToCockpitMenu(budgetTestData.menuName);  
+    
   });
 
   test("Update Plan Name", async ({ adminPage }) => {

@@ -1,6 +1,8 @@
 // budget.testdata.ts
 
 export const budgetTestData = {
+
+  menuName: "Budget",
   groups: {
     defaultGroup: "Default",
     devSecOps: "DevSecOps",

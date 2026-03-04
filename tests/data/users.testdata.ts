@@ -1,4 +1,5 @@
 export const USERS_TEST_DATA = {
+  menuName: 'Users',
   users: [
     { name: 'Admin', email: 'admin2@testcorp.com', role: 'Admin', workspace: 'Default' },
     { name: 'Bob', email: 'admin2@testcorp.com', role: 'Admin' },
@@ -15,4 +16,17 @@ export const USERS_TEST_DATA = {
     field: 'USER MEMBER',
     searchValue: 'f',
   },
+};
+
+export const INVITE_TEST_DATA = {
+  inviteUser: {
+    email: 'lkjehoz@gmail.com',
+    role: 'USER',
+  },
+
+  expectedStatus: {
+    pending: 'PENDING',
+    accepted: 'ACCEPTED',
+    rejected: 'REJECTED'
+  }
 };

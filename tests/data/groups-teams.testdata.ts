@@ -1,6 +1,7 @@
 // testdata/groupsTeams.testdata.ts
 
 export const groupsTeamsTestData = {
+  menuName: "Groups & Teams",
 
   groups: {
     default: "Default",

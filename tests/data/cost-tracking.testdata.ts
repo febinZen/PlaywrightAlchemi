@@ -2,6 +2,8 @@
 
 export const costTrackingTestData = {
 
+  menuName: "Cost Tracking",
+
   metrics: [
     "USER",
     "WORKSPACE",
